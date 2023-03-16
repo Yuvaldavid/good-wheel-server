@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 4000;
+app.use(express.json())
 const data = [
   {
     id: "0",
@@ -58,7 +59,9 @@ const data = [
 ];
 
 app.post("/update-status", (req, res) => {
-  res.send("Hello World!");
+    const index = data.findIndex((item) => item.id === req.body.id)
+    data[index].status = req.body.status
+     res.send({data});
 });
 
 app.listen(port, () => {
